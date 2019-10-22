@@ -63,7 +63,8 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Convert\Units.cs" />
+    <Compile Include="Convert\Weight.cs" />
+    <Compile Include="Convert\Temperature.cs" />
     <Compile Include="Convert\Length.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>

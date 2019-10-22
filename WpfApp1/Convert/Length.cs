@@ -25,11 +25,32 @@ namespace WpfApp1.Convert
             get { return this.meter * 1000; }
             set { this.meter = value / 1000; }
         }
-        public double Decymeter{
+        public double Decymeter
+        {
             get { return this.meter * 10; }
             set { this.meter = value / 10; }
         }
+        public double Feet
+        {
+            get { return this.meter / 0.3; }
+            set { this.meter = value * 0.3; }
+        }
+        public double Inch
+        {
+            get { return this.meter * 39.370; }
+            set { this.meter = value / 39.370; }
+        }
 
+       
 
+        public static List<string> GetListOfProperties()
+        {
+            List<string> array = new List<string>();
+            foreach(var prop in typeof(Length).GetProperties())
+            {
+                array.Add(prop.Name);
+            }
+            return array;
+        }
     }
 }

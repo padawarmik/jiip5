@@ -13,5 +13,6 @@
         <Button Content="Button" HorizontalAlignment="Left" Margin="402,10,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="Button_Click"/>
         <ComboBox x:Name="ToUnitSelector" HorizontalAlignment="Left" Margin="277,10,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0"/>
         <TextBlock x:Name="ReturnValue" HorizontalAlignment="Left" Margin="46,50,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
+        <ComboBox x:Name="TypeSelector" HorizontalAlignment="Left" Margin="650,10,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0" SelectionChanged="TypeSelector_SelectionChanged"/>
     </Grid>
 </Window>

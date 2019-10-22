@@ -22,28 +22,80 @@ namespace WpfApp1
     /// </summary>
     public partial class MainWindow : Window
     {
+        Type classType;
+        public List<string> GetListOfTypes()
+        {
+            List<string> listOfClasses = new List<string>();
+            var assembly = Assembly.GetExecutingAssembly();
+            foreach (var type in assembly.GetTypes())
+            {
+                if (type.Namespace == "WpfApp1.Convert")
+                {
+                    listOfClasses.Add(type.Name);
+                }
+            }
+            return listOfClasses;
+        }
         public MainWindow()
         {
             InitializeComponent();
-            FromUnitSelector.ItemsSource = Enum.GetValues(typeof(Units)).Cast<Units>().ToList(); ;
-            ToUnitSelector.ItemsSource = Enum.GetValues(typeof(Units)).Cast<Units>().ToList(); ;
+            List<string> listOfTypes = GetListOfTypes();
+            TypeSelector.ItemsSource = listOfTypes;
+            LoadInputTypes(listOfTypes.First());
+        }
+
+        private void LoadInputTypes(string className)
+        {
+            try
+            {
+                Console.WriteLine("className: " + className);
+                classType = Type.GetType("WpfApp1.Convert." + className);
+                if (classType != null)
+                {
+                    MethodInfo method = classType.GetMethod("GetListOfProperties");
+                    List<string> propertiesList = (List<string>)method.Invoke(null, null);
+                    FillComboBox(FromUnitSelector, propertiesList);
+                    FillComboBox(ToUnitSelector, propertiesList);
+                }
+            }
+            catch (Exception e){
+                Console.WriteLine(e.StackTrace);
+            }
+        }
+
+        private void FillComboBox(ComboBox comboBox, List<string> propertiesList)
+        {
+            comboBox.ItemsSource = propertiesList;
+            comboBox.SelectedItem = propertiesList.First();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
+            ReturnValue.Text = ConvertValue();
+        }
+
+        private string ConvertValue()
+        {
+            Object classInstance = classType.GetConstructor(new Type[] { }).Invoke(new object[] { });
             String value = FromUnitSelector.Text;
             double convertFromValue = Double.Parse(ConvertFromValue.Text);
-            Length l = new Length();
-            PropertyInfo set = typeof(Length).GetProperty(FromUnitSelector.Text);
-            PropertyInfo get = typeof(Length).GetProperty(ToUnitSelector.Text);
+            PropertyInfo set = classType.GetProperty(FromUnitSelector.Text);
+            PropertyInfo get = classType.GetProperty(ToUnitSelector.Text);
             if (set == null || get == null)
             {
-                Console.Write("null");
                 throw new MethodAccessException();
             }
-            set.SetValue(l, convertFromValue);
-            ReturnValue.Text = get.GetValue(l).ToString();
-            
+            set.SetValue(classInstance, convertFromValue);
+            return get.GetValue(classInstance).ToString();
+        }
+
+        private void TypeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            string selected = TypeSelector.SelectedItem.ToString();
+            Console.WriteLine(selected);
+            LoadInputTypes(selected);
+
+
         }
     }
 }
