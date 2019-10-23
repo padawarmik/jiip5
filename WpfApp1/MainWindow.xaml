@@ -8,11 +8,12 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid HorizontalAlignment="Left" Height="430" Margin="10,10,0,-20" VerticalAlignment="Top" Width="780">
-        <TextBox x:Name="ConvertFromValue" HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="120" />
+        <TextBox x:Name="ConvertFromValue"  HorizontalAlignment="Left" Height="23" Margin="10,10,0,0" TextWrapping="Wrap" Text="1" VerticalAlignment="Top" Width="120" />
         <ComboBox x:Name="FromUnitSelector" HorizontalAlignment="Left" Margin="135,10,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0"/>
         <Button Content="Button" HorizontalAlignment="Left" Margin="402,10,0,0" VerticalAlignment="Top" Width="75" Height="23" Click="Button_Click"/>
         <ComboBox x:Name="ToUnitSelector" HorizontalAlignment="Left" Margin="277,10,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0"/>
         <TextBlock x:Name="ReturnValue" HorizontalAlignment="Left" Margin="46,50,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top"/>
         <ComboBox x:Name="TypeSelector" HorizontalAlignment="Left" Margin="650,10,0,0" VerticalAlignment="Top" Width="120" SelectedIndex="0" SelectionChanged="TypeSelector_SelectionChanged"/>
+        <DataGrid x:Name="StatisticData" HorizontalAlignment="Left" Height="280" Margin="10,111,0,0" VerticalAlignment="Top" Width="760"/>
     </Grid>
 </Window>
