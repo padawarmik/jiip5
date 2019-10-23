@@ -48,7 +48,6 @@ namespace WpfApp1
         {
             try
             {
-                Console.WriteLine("className: " + className);
                 classType = Type.GetType("WpfApp1.Convert." + className);
                 if (classType != null)
                 {
@@ -78,7 +77,7 @@ namespace WpfApp1
         {
             Object classInstance = classType.GetConstructor(new Type[] { }).Invoke(new object[] { });
             String value = FromUnitSelector.Text;
-            double convertFromValue = Double.Parse(ConvertFromValue.Text);
+            double convertFromValue = Double.Parse(ConvertFromValue.Text.Replace(",", "."));
             PropertyInfo set = classType.GetProperty(FromUnitSelector.Text);
             PropertyInfo get = classType.GetProperty(ToUnitSelector.Text);
             if (set == null || get == null)

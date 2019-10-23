@@ -32,16 +32,35 @@ namespace WpfApp1.Convert
         }
         public double Feet
         {
-            get { return this.meter / 0.3; }
-            set { this.meter = value * 0.3; }
+            get { return this.meter * 3.2808; }
+            set { this.meter = value / 3.2808; }
         }
         public double Inch
         {
-            get { return this.meter * 39.370; }
-            set { this.meter = value / 39.370; }
+            get { return this.meter * 39.37; }
+            set { this.meter = value / 39.37; }
         }
-
-       
+        public double Mile
+        {
+            get { return this.meter * 0.000621; }
+            set { this.meter = value / 0.000621; }
+        }
+        public double Yard
+        {
+            get { return this.meter * 1.0936; }
+            set { this.meter = value / 1.0936; }
+        }
+        public double Nautical_mile
+        {
+            get { return this.meter * 0.0005399; }
+            set { this.meter = value / 0.0005399; }
+        }
+        public double Cable
+        {
+            get { return this.meter * 0.005399; }
+            set { this.meter = value / 0.005399; }
+        }
+        
 
         public static List<string> GetListOfProperties()
         {
