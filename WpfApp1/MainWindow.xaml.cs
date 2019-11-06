@@ -17,6 +17,7 @@ namespace WpfApp1
     {
         Type classType;
         DbController dbController;
+        private IStatisticsRepository repository;
         public List<string> GetListOfTypes()
         {
             List<string> listOfClasses = new List<string>();
@@ -30,19 +31,24 @@ namespace WpfApp1
             }
             return listOfClasses;
         }
-        public MainWindow()
+        public MainWindow(IStatisticsRepository repo)
         {
+            this.repository = repo;
             InitializeComponent();
             dbController = new DbController();
             List<string> listOfTypes = GetListOfTypes();
             TypeSelector.ItemsSource = listOfTypes;
             LoadInputTypes(listOfTypes.First());
+            
             FillDataGrid();
         }
 
         private void FillDataGrid()
         {
-            StatisticData.ItemsSource = dbController.ExecSelect("select * from [KASETY_502_17].[Z502_17].[CONVERSION_LOG]").DefaultView;
+
+            //StatisticData.ItemsSource = dbController.ExecSelect("select * from [KASETY_502_17].[Z502_17].[CONVERSION_LOG]").DefaultView;
+            //StatisticData.ItemsSource = repo
+            this.StatisticData.ItemsSource = repository.GetStatistics();
             StatisticData.AutoGenerateColumns = true;
         }
 
@@ -98,12 +104,18 @@ namespace WpfApp1
 
         private void DbLog(double convertFromValue, string fromUnit, string toUnit, string convertedValue)
         {
+            StatisticsObject statisticsObject = new StatisticsObject()
+            {
+                CL_Date = DateTime.Now,
+                CL_UnitType = classType.Name,
+                CL_UnitFrom = fromUnit,
+                CL_UnitTo = toUnit,
+                CL_ValueFrom = decimal.Parse(convertFromValue.ToString()),
+                CL_ValueTo = decimal.Parse(convertedValue),
 
-            string sql = String.Format("INSERT INTO [Z502_17].[CONVERSION_LOG]([CL_UnitFrom],[CL_ValueFrom]," +
-                "[CL_UnitTo],[CL_ValueTo], [CL_UnitType]) VALUES('{0}',{1},'{2}',{3}, '{4}')", fromUnit, ReplaceComma(convertFromValue), 
-                    toUnit, ReplaceComma(convertedValue), classType.Name);
-            int i = dbController.ExecStatement(sql);
-            Log.Info(i.ToString());
+            };
+            this.repository.AddStatistic(statisticsObject);
+            //dbController.appendLog(statisticsObject);
         }
 
         private string ReplaceComma(object obj)

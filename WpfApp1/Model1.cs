@@ -4,6 +4,7 @@ namespace WpfApp1
     using System.Data.Entity;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
+    using WpfApp1.Commons;
 
     public partial class Model1 : DbContext
     {
@@ -12,6 +13,7 @@ namespace WpfApp1
         {
         }
 
+        public virtual DbSet<StatisticsObject> Statistics { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

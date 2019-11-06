@@ -63,9 +63,16 @@ namespace WpfApp1.Commons
             return dataTable;
         }
 
+        public void appendLog(CONVERSION_LOG statisticsObject)
+        {
+            string sql = String.Format("INSERT INTO [Z502_17].[CONVERSION_LOG]([CL_UnitFrom],[CL_ValueFrom]," +
+                "[CL_UnitTo],[CL_ValueTo], [CL_UnitType]) VALUES('{0}',{1},'{2}',{3}, '{4}')", statisticsObject.CL_UnitFrom, statisticsObject.CL_ValueFrom,
+                    statisticsObject.CL_UnitTo, statisticsObject.CL_ValueTo, statisticsObject.CL_UnitType);
+            this.ExecStatement(sql);
+        }
         private void OpenConnection()
         {
-            this.con = new SqlConnection(ConfigurationManager.ConnectionStrings["DB"].ConnectionString);
+            this.con = new SqlConnection(ConfigurationManager.ConnectionStrings["Model1"].ConnectionString);
             con.Open();
         }
 
