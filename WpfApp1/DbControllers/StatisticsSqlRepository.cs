@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using System.Linq;
-using WpfApp1;
-using WpfApp1.Commons;
 
 namespace WpfApp1
 {
@@ -10,7 +7,7 @@ namespace WpfApp1
     {
         public void AddStatistic(StatisticsObject statistic)
         {
-            using (wwsi context = new wwsi())
+            using (WwsiModel context = new WwsiModel())
             {
                 context.CONVERSION_LOG.Add(new CONVERSION_LOG()
                 {
@@ -28,7 +25,7 @@ namespace WpfApp1
 
         public IEnumerable<StatisticsObject> GetStatistics()
         {
-            using (wwsi context = new wwsi())
+            using (WwsiModel context = new WwsiModel())
             {
                 return context.CONVERSION_LOG.Select(obj => new StatisticsObject() {
                         CL_Date = obj.CL_Date,
@@ -37,8 +34,7 @@ namespace WpfApp1
                         CL_UnitTo = obj.CL_UnitTo,
                         CL_ValueFrom = obj.CL_ValueFrom,
                         CL_ValueTo = obj.CL_ValueTo,
-                    }).
-                    ToList();
+                    }).ToList();
             }
         }
     }

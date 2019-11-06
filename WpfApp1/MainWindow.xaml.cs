@@ -1,13 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Data;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
 using System.Windows.Controls;
-using System.Configuration;
 using WpfApp1.Commons;
+
 namespace WpfApp1
 {
     /// <summary>
@@ -16,7 +14,6 @@ namespace WpfApp1
     public partial class MainWindow : Window
     {
         Type classType;
-        DbController dbController;
         private IStatisticsRepository repository;
         public List<string> GetListOfTypes()
         {
@@ -35,7 +32,6 @@ namespace WpfApp1
         {
             this.repository = repo;
             InitializeComponent();
-            dbController = new DbController();
             List<string> listOfTypes = GetListOfTypes();
             TypeSelector.ItemsSource = listOfTypes;
             LoadInputTypes(listOfTypes.First());
@@ -45,9 +41,6 @@ namespace WpfApp1
 
         private void FillDataGrid()
         {
-
-            //StatisticData.ItemsSource = dbController.ExecSelect("select * from [KASETY_502_17].[Z502_17].[CONVERSION_LOG]").DefaultView;
-            //StatisticData.ItemsSource = repo
             this.StatisticData.ItemsSource = repository.GetStatistics();
             StatisticData.AutoGenerateColumns = true;
         }
@@ -82,7 +75,7 @@ namespace WpfApp1
             FillDataGrid();
         }
 
-        private string ConvertValue() //TODO ogarnij to trochę
+        private string ConvertValue()
         {
             Object classInstance = classType.GetConstructor(new Type[] { }).Invoke(new object[] { });
             String value = FromUnitSelector.Text;
@@ -115,12 +108,6 @@ namespace WpfApp1
 
             };
             this.repository.AddStatistic(statisticsObject);
-            //dbController.appendLog(statisticsObject);
-        }
-
-        private string ReplaceComma(object obj)
-        {
-            return obj.ToString().Replace(',', '.');
         }
 
         private void TypeSelector_SelectionChanged(object sender, SelectionChangedEventArgs e)

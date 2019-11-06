@@ -1,13 +1,11 @@
+using System.Data.Entity;
+
 namespace WpfApp1
 {
-    using System;
-    using System.Data.Entity;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Linq;
 
-    public partial class wwsi : DbContext
+    public partial class WwsiModel : DbContext
     {
-        public wwsi()
+        public WwsiModel()
             : base("name=wwsi")
         {
         }

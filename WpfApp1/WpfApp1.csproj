@@ -94,12 +94,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
-    <Compile Include="CONVERSION_LOG.cs" />
-    <Compile Include="C__MigrationHistory.cs" />
-    <Compile Include="IStatisticsRepository.cs" />
-    <Compile Include="wwsi.cs" />
-    <Compile Include="Commons\StatisticsObject.cs" />
-    <Compile Include="StatisticsSqlRepository.cs" />
+    <Compile Include="Model\CONVERSION_LOG.cs" />
+    <Compile Include="DbControllers\IStatisticsRepository.cs" />
+    <Compile Include="Model\WwsiModel.cs" />
+    <Compile Include="Model\StatisticsObject.cs" />
+    <Compile Include="DbControllers\StatisticsSqlRepository.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -109,8 +108,8 @@
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="AzureSorage\StatisticsEntity.cs" />
-    <Compile Include="Commons\AzureDbController.cs" />
-    <Compile Include="Commons\DbController.cs" />
+    <Compile Include="DbControllers\AzureDbController.cs" />
+    <Compile Include="unused\DbController.cs" />
     <Compile Include="Commons\Log.cs" />
     <Compile Include="Convert\Weight.cs" />
     <Compile Include="Convert\Temperature.cs" />
@@ -121,7 +120,6 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Model1.cs" />
     <Compile Include="Properties\AssemblyInfo.cs">
       <SubType>Code</SubType>
     </Compile>

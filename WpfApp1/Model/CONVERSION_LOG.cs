@@ -1,12 +1,9 @@
+using System;
+using System.ComponentModel.DataAnnotations;
+
 namespace WpfApp1
 {
-    using System;
-    using System.Collections.Generic;
-    using System.ComponentModel.DataAnnotations;
-    using System.ComponentModel.DataAnnotations.Schema;
-    using System.Data.Entity.Spatial;
 
-    [Table("Z502_17.CONVERSION_LOG")]
     public partial class CONVERSION_LOG
     {
         [Key]

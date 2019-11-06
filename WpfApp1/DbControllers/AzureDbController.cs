@@ -5,11 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using WpfApp1.AzureSorage;
-using WpfApp1;
-using WpfApp1.Commons;
 
 namespace WpfApp1.Commons
 {
@@ -27,7 +23,7 @@ namespace WpfApp1.Commons
         public void AddStatistic(StatisticsObject statistic)
         {
             StatisticsEntity entity = new StatisticsEntity();
-            entity.PartitionKey = string.Empty; // computer name;
+            entity.PartitionKey = string.Empty;
             entity.RowKey = Guid.NewGuid().ToString();
             entity.CL_UnitFrom = statistic.CL_UnitFrom;
             entity.CL_ValueFrom = statistic.CL_ValueFrom.ToString();
